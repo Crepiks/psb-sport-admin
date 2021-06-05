@@ -32,65 +32,12 @@
       <div class="event-tags">
         <div
           class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Футбол мини' }"
+          v-for="(sport, index) in event.sport"
+          :key="index"
         >
-          Футбол мини
+          {{ sport.title }}
         </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Футбол большой' }"
-        >
-          Футбол большой
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == null }"
-        >
-          Волейбол
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Баскетбол' }"
-        >
-          Баскетбол
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Стретчинг' }"
-        >
-          Стретчинг
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Настольный теннис' }"
-        >
-          Настольный теннис
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Бег' }"
-        >
-          Бег
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Гонки с препятствиями' }"
-        >
-          Гонки с препятствиями
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Триатлон' }"
-        >
-          Триатлон
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Хоккей' }"
-        >
-          Хоккей
-        </div>
-        <div class="event-tag">+</div>
+        <div class="event-tag event-tag-add">+</div>
       </div>
       <psbAppInput class="event-input" v-model="event.title" title="Название" />
       <psbAppTextarea
@@ -101,13 +48,8 @@
       <div class="event-container">
         <psbAppInput
           class="event-input event-container-inner"
-          v-model="event.start"
+          v-model="event.date"
           title="Начало"
-        />
-        <psbAppInput
-          class="event-input event-container-inner"
-          v-model="event.end"
-          title="Конец"
         />
       </div>
       <div class="event-container">
@@ -126,9 +68,7 @@
         Посмотреть на карте
       </div>
     </div>
-    <psbAppButton @click="handleClick" :isLoading="isLoading"
-      >Сохранить</psbAppButton
-    >
+    <psbAppButton :isLoading="isLoading">Сохранить</psbAppButton>
   </div>
 </template>
 
@@ -136,6 +76,8 @@
 import psbAppInput from "@/components/common/psb-app-input";
 import psbAppTextarea from "@/components/common/psb-app-textarea";
 import psbAppButton from "@/components/common/psb-app-button";
+
+// import { getEvent, editEvent as editEventRequest } from "@/requests/events.js"
 
 export default {
   components: {
@@ -155,6 +97,19 @@ export default {
     return {
       mainImage: null,
       isLoading: false,
+      // event: {},
+      sports: [
+        "Футбол большой",
+        "Футбол мини",
+        "Баскетбол",
+        "Волейбол",
+        "Триатлон",
+        "Хоккей",
+        "Бег",
+        "Гонки с препятствиями",
+        "Настольный теннис",
+        "Стретчинг",
+      ],
     };
   },
   methods: {
@@ -168,14 +123,28 @@ export default {
     changeMainImage(path) {
       this.mainImage = path;
     },
-    handleClick() {
-      this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-        this.$emit("event-edited");
-      }, 1500);
-    },
+    // editEvent() {
+    //   this.isLoading = true;
+    //   editEvent(this.eventId, this.event)
+    //     .then((res) => {
+    //       this.event = res.data.event;
+    //       this.isLoading = false;
+    //       this.$emit("event-edited");
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     });
+    // }
   },
+  // mounted() {
+  //   getEvent(this.eventId)
+  //     .then((res) => {
+  //       this.event = res.data.event;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     });
+  // }
 };
 </script>
 
@@ -275,7 +244,7 @@ export default {
     }
   }
 
-  &-tag:hover {
+  &-tag-add:hover {
     background-color: #b2b2b2;
     color: $black;
   }

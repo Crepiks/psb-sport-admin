@@ -40,7 +40,7 @@
     </div>
     <div class="events-right">
       <eventEdit
-        v-show="active == 'eventEdit'"
+        v-if="active == 'eventEdit'"
         ref="eventEdit"
         :event-id="eventId"
         :event="event"
@@ -48,15 +48,15 @@
         @toggle-map="isMapOpen = !isMapOpen"
       />
       <eventAdd
-        v-show="active == 'eventAdd'"
+        v-if="active == 'eventAdd'"
         @close-event-add="closeeventAdd"
         @toggle-map="isMapOpen = !isMapOpen"
       />
-      <div v-show="active == 'empty'" class="events-empty">
+      <div v-if="active == 'empty'" class="events-empty">
         <div class="events-empty-container">
-          <i class="fas fa-campground events-empty-icon"></i>
+          <i class="fas fa-volleyball-ball events-empty-icon"></i>
           <div class="events-empty-text">
-            Кликните на необходимый тур, чтобы просмотреть полную информацию
+            Кликните на необходимое событие, чтобы просмотреть полную информацию
           </div>
         </div>
       </div>
@@ -77,6 +77,8 @@ import eventEdit from "@/components/events/psb-event-edit";
 import eventAdd from "@/components/events/psb-event-add";
 import notification from "@/components/common/psb-notification";
 import psbEventMap from "@/components/events/psb-event-map.vue";
+
+// import { getEvents } from "@/requests/events.js"
 
 export default {
   components: {
@@ -101,299 +103,131 @@ export default {
       events: [
         {
           id: 1,
-          title: "Однодневный тур на озёра Кольсай - Каинды и Чёрный каньон",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Тренд этого года: озёра Кольсай и Каинды. Эти места заставят Вас в них влюбиться и возвращаться к ним снова и снова.\n Приглашаем Вас увидеть воочию озёра Кольсай и Каинды, а также посетить Чёрный каньон — идеальный вариант для релакса и единения с природой, так как на локациях Вы будете свободны от всемирной паутины интернета. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Футбол мини",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 3000,
         },
         {
           id: 2,
-          title: "Плато Ассы и Тургенский водопад",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Плато Ассы и Тургеньский водопад . Сезон поездок на самый красивый жайлау открыт.\n Прекрасный уголок природы - Платто Ассы. Где открывается красивый до невозможности вид. Чистейший воздух, легкий ветерок и величественные горы. Душевная и атмосферная обстановка , интересные люди и душевные рассказы. Сделаем красивые фото и крутые видео . Это тот самый отдых, который нужен тебе. Долго думать не нужно, поехали с нами!",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Футбол большой",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 6000,
         },
         {
           id: 3,
-          title: "Сплав по реке Или",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "ДЛИТЕЛЬНОСТЬ СПЛАВА 3,5 часа на воде. РАССТОЯНИЕ СПЛАВА 23км. Остановка на Чертовом пальце и на Крепости КОЧЕВНИКИ. Финиш ниже Тамгалы-Тас 1км.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Триатлон",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 2000,
         },
         {
           id: 4,
-          title: "Чарынский каньон + Бартогайское водохранилище",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Предлагаем Вам вместе с нами насладиться великолепным видами на каньоны и Бартогайское водохранилище. Мы успеем прогуляться по Долине Замков, сделать кучу крутых фото на обзорных площадках и понаблюдаем за бурной рекой Чарын, у которой остановимся на пикник. Это место заставит Вас в него влюбиться и возвращаться к нему снова и снова. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке. Чарынский каньон протянулся на 154 км вдоль реки Чарын. Удивительный памятник природы сложен из осадочных пород, возраст которых составляет порядка 12 миллионов лет. Высота достигает от 150 до 300 метров. Интересный факт: Чарынский каньон называют младшим братом Гранд-Каньона за счёт своей уникальной флоры и образования. Поэтому Вам обязательно стоит увидеть каньоны своими глазами",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Волейбол",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 5000,
         },
         {
           id: 5,
-          title: "Однодневный тур на озёра Кольсай - Каинды и Чёрный каньон",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Тренд этого года: озёра Кольсай и Каинды. Эти места заставят Вас в них влюбиться и возвращаться к ним снова и снова.\n Приглашаем Вас увидеть воочию озёра Кольсай и Каинды, а также посетить Чёрный каньон — идеальный вариант для релакса и единения с природой, так как на локациях Вы будете свободны от всемирной паутины интернета. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Баскетбол",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 3000,
         },
         {
           id: 6,
-          title: "Плато Ассы и Тургенский водопад",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Плато Ассы и Тургеньский водопад . Сезон поездок на самый красивый жайлау открыт.\n Прекрасный уголок природы - Платто Ассы. Где открывается красивый до невозможности вид. Чистейший воздух, легкий ветерок и величественные горы. Душевная и атмосферная обстановка , интересные люди и душевные рассказы. Сделаем красивые фото и крутые видео . Это тот самый отдых, который нужен тебе. Долго думать не нужно, поехали с нами!",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Настольный теннис",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 6000,
         },
         {
           id: 7,
-          title: "Сплав по реке Или",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "ДЛИТЕЛЬНОСТЬ СПЛАВА 3,5 часа на воде. РАССТОЯНИЕ СПЛАВА 23км. Остановка на Чертовом пальце и на Крепости КОЧЕВНИКИ. Финиш ниже Тамгалы-Тас 1км.",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Хоккей",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 2000,
         },
         {
           id: 8,
-          title: "Чарынский каньон + Бартогайское водохранилище",
+          title: "Соревнования по футболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Предлагаем Вам вместе с нами насладиться великолепным видами на каньоны и Бартогайское водохранилище. Мы успеем прогуляться по Долине Замков, сделать кучу крутых фото на обзорных площадках и понаблюдаем за бурной рекой Чарын, у которой остановимся на пикник. Это место заставит Вас в него влюбиться и возвращаться к нему снова и снова. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке. Чарынский каньон протянулся на 154 км вдоль реки Чарын. Удивительный памятник природы сложен из осадочных пород, возраст которых составляет порядка 12 миллионов лет. Высота достигает от 150 до 300 метров. Интересный факт: Чарынский каньон называют младшим братом Гранд-Каньона за счёт своей уникальной флоры и образования. Поэтому Вам обязательно стоит увидеть каньоны своими глазами",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
           images: [],
-          participants: [
+          date: "2021-05-05T14:24:01.000Z",
+          duration: 3,
+          sport: [
             {
-              id: 1,
-              firstName: "Амир",
-              lastName: "Албеков",
-              email: "amir@mail.ru",
-            },
-            {
-              id: 2,
-              firstName: "Аружан",
-              lastName: "Бесекова",
-              email: "aryka2003@mail.ru",
-            },
-            {
-              id: 3,
-              firstName: "Айлара",
-              lastName: "Светланова",
-              email: "ailara12345@mail.ru",
+              title: "Бег",
             },
           ],
-          creator: {
-            firstName: "Оксана",
-            lastName: "Иванова",
-            email: "oksana1975@mail.ru",
-          },
-          start: "2021-05-05T14:24:01.000Z",
-          end: "2021-05-06T14:24:01.000Z",
-          price: 5000,
         },
       ],
     };
@@ -424,6 +258,16 @@ export default {
       this.notificationHeading = "Изменения сохранены!";
     },
   },
+  // mounted() {
+  //   getEvents()
+  //     .then((res) => {
+  //       this.events = res.data.events;
+  //     })
+  //     .catch(() => {
+  //       this.notificationHeading = "Что-то пошло не так";
+  //       this.isNotificationOpen = true;
+  //     });
+  // }
 };
 </script>
 

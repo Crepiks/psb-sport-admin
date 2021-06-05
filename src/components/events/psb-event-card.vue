@@ -1,24 +1,30 @@
 <template>
   <div class="event" @click="$emit('click', event.id)">
-    <div class="event-image">
+    <!-- <div class="event-image">
       <img
         class="event-image-inner"
         :src="event.images.length ? null : null"
         alt=""
       />
-    </div>
+    </div> -->
     <div class="event-info">
       <div class="event-container">
-        <div class="event-tag">Тур на один день</div>
+        <div class="event-tags">
+          <div
+            class="event-tag"
+            v-for="(sport, index) in event.sport"
+            :key="index"
+          >
+            {{ sport.title }}
+          </div>
+        </div>
         <i class="far fa-edit event-edit"></i>
       </div>
       <div class="event-name">{{ event.title }}</div>
-      <div class="event-date">Начало: {{ event.start }}</div>
+      <div class="event-date">Начало: {{ event.date }}</div>
       <div class="event-container">
-        <div class="event-rating">
-          <i class="fas fa-star event-rating-star"></i> 4.8
-        </div>
-        <div class="event-people">{{ event.participants.length }} человек</div>
+        <div class="event-rating"></div>
+        <div class="event-people">{{ event.duration }} дня</div>
       </div>
     </div>
   </div>
@@ -57,7 +63,7 @@ export default {
   }
 
   &-info {
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -68,12 +74,23 @@ export default {
     justify-content: space-between;
   }
 
+  &-tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   &-tag {
     border: 1px solid $white;
     border-radius: 10px;
     padding: 5px 10px;
     font-size: 15px;
     opacity: 0.8;
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+
+  &-tag:first-child {
+    margin-left: 0;
   }
 
   &-edit {

@@ -52,7 +52,7 @@
             type="primary"
             html-type="submit"
             class="login-form-button"
-            :loading="loading"
+            :loading="isLoading"
           >
             Log in
           </a-button>
@@ -63,10 +63,16 @@
 </template>
 
 <script>
+// import { login } from "@/requests/auth.js";
+
 export default {
   data() {
     return {
-      loading: false,
+      isLsoading: false,
+      isNotificationOpen: false,
+      notificationHeading: "",
+      notificationText: "",
+      notificationStatus: "",
     };
   },
   beforeCreate() {
@@ -77,7 +83,26 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
+          // this.isLoading = true;
+          // login(values)
+          //   .then((res) => {
+          //     const user = {
+          //       id: res.data.user.id,
+          //       email: res.data.user.email,
+          //       token: res.data.auth.token,
+          //     };
+          //     localStorage.setItem("user", JSON.stringify(user));
+          //     this.$router.push("/");
+          //   })
+          //   .catch(() => {
+          //     this.notificationHeading = "Неверная почта или пароль";
+          //     this.isNotificationOpen = true;
+          //     this.notificationStatus = "error";
+          //   })
+          //   .finally(() => {
+          //     this.isLoading = false;
+          //   });
+          console.log(values);
           this.$router.push("/");
         }
       });
