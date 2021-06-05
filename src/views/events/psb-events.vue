@@ -1,5 +1,5 @@
 <template>
-  <div class="tours">
+  <div class="events">
     <notification
       :isActive="isNotificationOpen"
       :heading="notificationHeading"
@@ -7,21 +7,15 @@
       @close-notification="isNotificationOpen = false"
       :status="notificationStatus"
     />
-    <div class="tours-list">
+    <div class="events-list">
       <psbAppInputSearch placeholder="Искать" />
-      <div class="tours-tags">
-        <div class="tours-tag">На этой неделе</div>
-        <div class="tours-tag">Тур на один день</div>
-        <div class="tours-tag">Экстремальный тур</div>
-        <div class="tours-tag">Без спец оборудования</div>
-      </div>
-      <div class="tours-title-container">
-        <h2 class="tours-title">
-          Туры <span class="tours-number">{{ tours.length }}</span>
+      <div class="events-title-container">
+        <h2 class="events-title">
+          События <span class="events-number">{{ events.length }}</span>
         </h2>
-        <div class="tours-add" @click="tourAddClicked">
+        <div class="events-add" @click="eventAddClicked">
           <svg
-            class="tours-add-icon"
+            class="events-add-icon"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -34,62 +28,77 @@
           </svg>
         </div>
       </div>
-      <div class="tours-wrapper">
-        <tourCard
-          class="tours-card"
-          :tour="tour"
-          v-for="tour in tours"
-          :key="tour.id"
-          @click="tourCardClicked"
+      <div class="events-wrapper">
+        <eventCard
+          v-for="(event, index) in events"
+          class="events-card"
+          :event="event"
+          :key="index"
+          @click="eventCardClicked"
         />
       </div>
     </div>
-    <div class="tours-right">
-      <tourEdit
-        v-show="active == 'tourEdit'"
-        ref="tourEdit"
-        :tourId="tourId"
-        :tour="tour"
-        @tour-edited="tourEdited"
+    <div class="events-right">
+      <eventEdit
+        v-show="active == 'eventEdit'"
+        ref="eventEdit"
+        :event-id="eventId"
+        :event="event"
+        @event-edited="eventEdited"
+        @toggle-map="isMapOpen = !isMapOpen"
       />
-      <tourAdd v-show="active == 'tourAdd'" @close-tour-add="closeTourAdd" />
-      <div v-show="active == 'empty'" class="tours-empty">
-        <div class="tours-empty-container">
-          <i class="fas fa-campground tours-empty-icon"></i>
-          <div class="tours-empty-text">
+      <eventAdd
+        v-show="active == 'eventAdd'"
+        @close-event-add="closeeventAdd"
+        @toggle-map="isMapOpen = !isMapOpen"
+      />
+      <div v-show="active == 'empty'" class="events-empty">
+        <div class="events-empty-container">
+          <i class="fas fa-campground events-empty-icon"></i>
+          <div class="events-empty-text">
             Кликните на необходимый тур, чтобы просмотреть полную информацию
           </div>
         </div>
       </div>
     </div>
+    <psbEventMap
+      class="events-map"
+      :eventCoords="coords"
+      :isMapOpen="isMapOpen"
+      @close-map="isMapOpen = false"
+    />
   </div>
 </template>
 
 <script>
 import psbAppInputSearch from "@/components/common/psb-app-input-search";
-import tourCard from "@/components/tours/psb-tour-card";
-import tourEdit from "@/components/tours/psb-tour-edit";
-import tourAdd from "@/components/tours/psb-tour-add";
+import eventCard from "@/components/events/psb-event-card";
+import eventEdit from "@/components/events/psb-event-edit";
+import eventAdd from "@/components/events/psb-event-add";
 import notification from "@/components/common/psb-notification";
+import psbEventMap from "@/components/events/psb-event-map.vue";
 
 export default {
   components: {
     psbAppInputSearch,
-    tourCard,
-    tourEdit,
-    tourAdd,
+    eventCard,
+    eventEdit,
+    eventAdd,
     notification,
+    psbEventMap,
   },
   data() {
     return {
       active: "empty",
-      tourId: null,
+      eventId: null,
       isNotificationOpen: false,
       notificationHeading: "",
       notificationText: "",
       notificationStatus: "",
-      tour: {},
-      tours: [
+      event: {},
+      isMapOpen: false,
+      coords: [54.039777, 43.935073],
+      events: [
         {
           id: 1,
           title: "Однодневный тур на озёра Кольсай - Каинды и Чёрный каньон",
@@ -97,28 +106,7 @@ export default {
           lon: 43.935073,
           description:
             "Тренд этого года: озёра Кольсай и Каинды. Эти места заставят Вас в них влюбиться и возвращаться к ним снова и снова.\n Приглашаем Вас увидеть воочию озёра Кольсай и Каинды, а также посетить Чёрный каньон — идеальный вариант для релакса и единения с природой, так как на локациях Вы будете свободны от всемирной паутины интернета. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке.",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/1-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/1-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/1-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/1-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/1-5.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -155,28 +143,7 @@ export default {
           lon: 43.935073,
           description:
             "Плато Ассы и Тургеньский водопад . Сезон поездок на самый красивый жайлау открыт.\n Прекрасный уголок природы - Платто Ассы. Где открывается красивый до невозможности вид. Чистейший воздух, легкий ветерок и величественные горы. Душевная и атмосферная обстановка , интересные люди и душевные рассказы. Сделаем красивые фото и крутые видео . Это тот самый отдых, который нужен тебе. Долго думать не нужно, поехали с нами!",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/2-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/2-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/2-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/2-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/2-5.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -213,28 +180,7 @@ export default {
           lon: 43.935073,
           description:
             "ДЛИТЕЛЬНОСТЬ СПЛАВА 3,5 часа на воде. РАССТОЯНИЕ СПЛАВА 23км. Остановка на Чертовом пальце и на Крепости КОЧЕВНИКИ. Финиш ниже Тамгалы-Тас 1км.",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/3-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/3-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/3-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/3-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/3-5.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -271,32 +217,7 @@ export default {
           lon: 43.935073,
           description:
             "Предлагаем Вам вместе с нами насладиться великолепным видами на каньоны и Бартогайское водохранилище. Мы успеем прогуляться по Долине Замков, сделать кучу крутых фото на обзорных площадках и понаблюдаем за бурной рекой Чарын, у которой остановимся на пикник. Это место заставит Вас в него влюбиться и возвращаться к нему снова и снова. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке. Чарынский каньон протянулся на 154 км вдоль реки Чарын. Удивительный памятник природы сложен из осадочных пород, возраст которых составляет порядка 12 миллионов лет. Высота достигает от 150 до 300 метров. Интересный факт: Чарынский каньон называют младшим братом Гранд-Каньона за счёт своей уникальной флоры и образования. Поэтому Вам обязательно стоит увидеть каньоны своими глазами",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/4-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/4-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/4-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/4-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/4-5.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/4-6.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -333,28 +254,7 @@ export default {
           lon: 43.935073,
           description:
             "Тренд этого года: озёра Кольсай и Каинды. Эти места заставят Вас в них влюбиться и возвращаться к ним снова и снова.\n Приглашаем Вас увидеть воочию озёра Кольсай и Каинды, а также посетить Чёрный каньон — идеальный вариант для релакса и единения с природой, так как на локациях Вы будете свободны от всемирной паутины интернета. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке.",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/1-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/1-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/1-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/1-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/1-5.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -391,28 +291,7 @@ export default {
           lon: 43.935073,
           description:
             "Плато Ассы и Тургеньский водопад . Сезон поездок на самый красивый жайлау открыт.\n Прекрасный уголок природы - Платто Ассы. Где открывается красивый до невозможности вид. Чистейший воздух, легкий ветерок и величественные горы. Душевная и атмосферная обстановка , интересные люди и душевные рассказы. Сделаем красивые фото и крутые видео . Это тот самый отдых, который нужен тебе. Долго думать не нужно, поехали с нами!",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/2-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/2-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/2-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/2-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/2-5.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -449,28 +328,7 @@ export default {
           lon: 43.935073,
           description:
             "ДЛИТЕЛЬНОСТЬ СПЛАВА 3,5 часа на воде. РАССТОЯНИЕ СПЛАВА 23км. Остановка на Чертовом пальце и на Крепости КОЧЕВНИКИ. Финиш ниже Тамгалы-Тас 1км.",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/3-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/3-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/3-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/3-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/3-5.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -507,32 +365,7 @@ export default {
           lon: 43.935073,
           description:
             "Предлагаем Вам вместе с нами насладиться великолепным видами на каньоны и Бартогайское водохранилище. Мы успеем прогуляться по Долине Замков, сделать кучу крутых фото на обзорных площадках и понаблюдаем за бурной рекой Чарын, у которой остановимся на пикник. Это место заставит Вас в него влюбиться и возвращаться к нему снова и снова. Бери друзей, семью и любимых, чтобы провести с ними выходной в природной сказке. Чарынский каньон протянулся на 154 км вдоль реки Чарын. Удивительный памятник природы сложен из осадочных пород, возраст которых составляет порядка 12 миллионов лет. Высота достигает от 150 до 300 метров. Интересный факт: Чарынский каньон называют младшим братом Гранд-Каньона за счёт своей уникальной флоры и образования. Поэтому Вам обязательно стоит увидеть каньоны своими глазами",
-          images: [
-            {
-              id: 1,
-              path: "https://static.psb.space/4-1.jpeg",
-            },
-            {
-              id: 2,
-              path: "https://static.psb.space/4-2.jpeg",
-            },
-            {
-              id: 3,
-              path: "https://static.psb.space/4-3.jpeg",
-            },
-            {
-              id: 4,
-              path: "https://static.psb.space/4-4.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/4-5.jpeg",
-            },
-            {
-              id: 5,
-              path: "https://static.psb.space/4-6.jpeg",
-            },
-          ],
+          images: [],
           participants: [
             {
               id: 1,
@@ -566,26 +399,26 @@ export default {
     };
   },
   methods: {
-    tourAddClicked() {
-      this.active = "tourAdd";
+    eventAddClicked() {
+      this.active = "eventAdd";
     },
-    tourCardClicked(id) {
-      this.active = "tourEdit";
-      this.tourId = id;
-      for (let i = 0; i < this.tours.length; i++) {
-        if (this.tours[i].id == id) {
-          this.tour = this.tours[i];
-          this.$refs.tourEdit.changeMainImage(this.tours[i].images[0].path);
+    eventCardClicked(id) {
+      this.active = "eventEdit";
+      this.eventId = id;
+      for (let i = 0; i < this.events.length; i++) {
+        if (this.events[i].id == id) {
+          this.event = this.events[i];
+          // this.$refs.eventEdit.changeMainImage(this.events[i].images[0].path);
         }
       }
     },
-    closeTourAdd() {
+    closeeventAdd() {
       this.active = "empty";
       this.isNotificationOpen = true;
       this.notificationStatus = "success";
       this.notificationHeading = "Тур успешно добавлен!";
     },
-    tourEdited() {
+    eventEdited() {
       this.isNotificationOpen = true;
       this.notificationStatus = "success";
       this.notificationHeading = "Изменения сохранены!";
@@ -598,7 +431,7 @@ export default {
 @import "@/assets/styles/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap");
 
-.tours {
+.events {
   color: $white;
   display: flex;
   justify-content: space-between;
@@ -650,7 +483,7 @@ export default {
 
   &-wrapper {
     margin-top: 40px;
-    max-height: 60%;
+    max-height: 80%;
     overflow: auto;
   }
 

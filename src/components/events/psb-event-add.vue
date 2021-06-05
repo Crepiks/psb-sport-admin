@@ -19,32 +19,6 @@
       </a-modal>
     </div>
     <div class="tour-info">
-      <div class="tour-tags">
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'На этой неделе' }"
-        >
-          На этой неделе
-        </div>
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'Тур на один день' }"
-        >
-          Тур на один день
-        </div>
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'Экстремальный тур' }"
-        >
-          Экстремальный тур
-        </div>
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'Без спец оборудования' }"
-        >
-          Без спец оборудования
-        </div>
-      </div>
       <psbAppInput
         class="tour-input"
         v-model="tour.title"
@@ -85,12 +59,9 @@
           placeholder="Введите широту"
         />
       </div>
-      <psbAppInput
-        class="tour-input tour-container-inner"
-        v-model="tour.price"
-        title="Цена"
-        placeholder="Введите цену"
-      />
+      <div class="tour-map-toggle" @click="$emit('toggle-map')">
+        Указать на карте
+      </div>
     </div>
     <psbAppButton @click="handleClick" :isLoading="isLoading"
       >Добавить</psbAppButton
@@ -231,6 +202,17 @@ export default {
     &-inner {
       width: 46%;
     }
+  }
+
+  &-map-toggle {
+    background-color: $dark-white;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    width: fit-content;
+    cursor: pointer;
   }
 }
 </style>

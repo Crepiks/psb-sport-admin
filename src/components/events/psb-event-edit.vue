@@ -1,91 +1,66 @@
 <template>
-  <div class="tour">
-    <div class="tour-image">
-      <img :src="mainImage" class="tour-image-inner" alt="" />
+  <div class="event">
+    <div class="event-image">
+      <img
+        :src="mainImage ? mainImage : null"
+        class="event-image-inner"
+        alt=""
+      />
     </div>
-    <div class="tour-images">
+    <div class="event-images">
       <div
-        class="tour-images-single"
-        v-for="image in tour.images"
+        class="event-images-single"
+        v-for="image in event.images"
         :key="image.id"
         @mouseover="changeImage(image)"
         @mouseout="mouseOut(image)"
       >
-        <img :src="image.path" class="tour-images-single-inner" alt="" />
+        <img
+          :src="image.path ? image.path : null"
+          class="event-images-single-inner"
+          alt=""
+        />
         <div
-          class="tour-images-single-cover"
-          :class="{ 'tour-images-single-cover-active': image.cover }"
+          class="event-images-single-cover"
+          :class="{ 'event-images-single-cover-active': image.cover }"
         >
-          <i class="far fa-trash-alt tour-images-single-cover-icon"></i>
+          <i class="far fa-trash-alt event-images-single-cover-icon"></i>
         </div>
       </div>
     </div>
-    <div class="tour-info">
-      <div class="tour-tags">
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'На этой неделе' }"
-        >
-          На этой неделе
-        </div>
-        <div class="tour-tag" :class="{ 'tour-tag-active': tour.tag == null }">
-          Тур на один день
-        </div>
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'Экстремальный тур' }"
-        >
-          Экстремальный тур
-        </div>
-        <div
-          class="tour-tag"
-          :class="{ 'tour-tag-active': tour.tag == 'Без спец оборудования' }"
-        >
-          Без спец оборудования
-        </div>
-      </div>
-      <psbAppInput class="tour-input" v-model="tour.title" title="Название" />
+    <div class="event-info">
+      <psbAppInput class="event-input" v-model="event.title" title="Название" />
       <psbAppTextarea
-        class="tour-input"
-        v-model="tour.description"
+        class="event-input"
+        v-model="event.description"
         title="Описание"
       />
-      <div class="tour-container">
+      <div class="event-container">
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.start"
+          class="event-input event-container-inner"
+          v-model="event.start"
           title="Начало"
         />
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.end"
+          class="event-input event-container-inner"
+          v-model="event.end"
           title="Конец"
         />
       </div>
-      <div class="tour-container">
+      <div class="event-container">
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.lon"
+          class="event-input event-container-inner"
+          v-model="event.lon"
           title="Долгота"
         />
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.lat"
+          class="event-input event-container-inner"
+          v-model="event.lat"
           title="Широта"
         />
       </div>
-      <psbAppInput class="tour-input" v-model="tour.price" title="Цена" />
-      <div>
-        <div class="tour-bubble-title">Участники</div>
-        <div class="tour-bubble-container">
-          <div
-            class="tour-bubble"
-            v-for="participant in tour.participants"
-            :key="participant.id"
-          >
-            {{ participant.firstName }} {{ participant.email }}
-          </div>
-        </div>
+      <div class="event-map-toggle" @click="$emit('toggle-map')">
+        Посмотреть на карте
       </div>
     </div>
     <psbAppButton @click="handleClick" :isLoading="isLoading"
@@ -106,11 +81,11 @@ export default {
     psbAppButton,
   },
   props: {
-    tourId: {
+    eventId: {
       type: Number,
     },
-    tour: {
-      type: [Array, Object],
+    event: {
+      type: Object,
     },
   },
   data() {
@@ -134,7 +109,7 @@ export default {
       this.isLoading = true;
       setTimeout(() => {
         this.isLoading = false;
-        this.$emit("tour-edited");
+        this.$emit("event-edited");
       }, 1500);
     },
   },
@@ -144,7 +119,7 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/variables.scss";
 
-.tour {
+.event {
   max-height: 100%;
   overflow: auto;
 
@@ -249,6 +224,17 @@ export default {
     &-inner {
       width: 46%;
     }
+  }
+
+  &-map-toggle {
+    background-color: $dark-white;
+    padding: 5px 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    width: fit-content;
+    cursor: pointer;
   }
 
   &-bubble {

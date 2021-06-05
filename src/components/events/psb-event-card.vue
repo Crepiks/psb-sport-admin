@@ -1,20 +1,24 @@
 <template>
-  <div class="tour" @click="$emit('click', tour.id)">
-    <div class="tour-image">
-      <img class="tour-image-inner" :src="tour.images[0].path" alt="" />
+  <div class="event" @click="$emit('click', event.id)">
+    <div class="event-image">
+      <img
+        class="event-image-inner"
+        :src="event.images.length ? null : null"
+        alt=""
+      />
     </div>
-    <div class="tour-info">
-      <div class="tour-container">
-        <div class="tour-tag">Тур на один день</div>
-        <i class="far fa-edit tour-edit"></i>
+    <div class="event-info">
+      <div class="event-container">
+        <div class="event-tag">Тур на один день</div>
+        <i class="far fa-edit event-edit"></i>
       </div>
-      <div class="tour-name">{{ tour.title }}</div>
-      <div class="tour-date">Начало: {{ tour.start }}</div>
-      <div class="tour-container">
-        <div class="tour-rating">
-          <i class="fas fa-star tour-rating-star"></i> 4.8
+      <div class="event-name">{{ event.title }}</div>
+      <div class="event-date">Начало: {{ event.start }}</div>
+      <div class="event-container">
+        <div class="event-rating">
+          <i class="fas fa-star event-rating-star"></i> 4.8
         </div>
-        <div class="tour-people">{{ tour.participants.length }} человек</div>
+        <div class="event-people">{{ event.participants.length }} человек</div>
       </div>
     </div>
   </div>
@@ -23,8 +27,8 @@
 <script>
 export default {
   props: {
-    tour: {
-      type: [Array, Object],
+    event: {
+      type: Object,
     },
   },
 };
@@ -33,7 +37,7 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/variables.scss";
 
-.tour {
+.event {
   display: flex;
   justify-content: space-between;
   color: $white;

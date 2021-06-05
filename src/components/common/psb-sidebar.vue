@@ -1,6 +1,8 @@
 <template>
   <div class="sidebar">
-    <i class="fas fa-map-signs sidebar-logo"></i>
+    <div class="sidebar-logo">
+      <img class="sidebar-logo-inner" src="@/assets/images/logo.svg" />
+    </div>
     <div class="sidebar-links">
       <router-link class="sidebar-link" to="/">
         <svg
@@ -86,8 +88,11 @@ export default {};
 
   &-logo {
     margin-top: 40px;
-    color: $primary;
-    font-size: 40px;
+    width: 70px;
+
+    &-inner {
+      width: 100%;
+    }
   }
 
   &-links {
