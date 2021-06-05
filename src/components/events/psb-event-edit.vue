@@ -29,6 +29,69 @@
       </div>
     </div>
     <div class="event-info">
+      <div class="event-tags">
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Футбол мини' }"
+        >
+          Футбол мини
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Футбол большой' }"
+        >
+          Футбол большой
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == null }"
+        >
+          Волейбол
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Баскетбол' }"
+        >
+          Баскетбол
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Стретчинг' }"
+        >
+          Стретчинг
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Настольный теннис' }"
+        >
+          Настольный теннис
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Бег' }"
+        >
+          Бег
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Гонки с препятствиями' }"
+        >
+          Гонки с препятствиями
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Триатлон' }"
+        >
+          Триатлон
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Хоккей' }"
+        >
+          Хоккей
+        </div>
+        <div class="event-tag">+</div>
+      </div>
       <psbAppInput class="event-input" v-model="event.title" title="Название" />
       <psbAppTextarea
         class="event-input"

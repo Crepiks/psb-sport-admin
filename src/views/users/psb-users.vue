@@ -178,6 +178,10 @@ export default {
         },
       ],
       isModalOpen: false,
+      isNotificationOpen: false,
+      notificationHeading: "",
+      notificationText: "",
+      notificationStatus: "",
     };
   },
   methods: {

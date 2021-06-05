@@ -80,7 +80,7 @@ export default {
     height: 40px;
     border: 1px solid $primary;
     border-radius: 10px;
-    background-color: #1f1f1f;
+    background-color: $dark-white;
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -108,7 +108,7 @@ export default {
     box-sizing: border-box;
     padding-top: 10px;
     border-radius: 0 0 10px 10px;
-    background-color: #292929;
+    background-color: $dark-white;
     z-index: 1;
     opacity: 1;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);

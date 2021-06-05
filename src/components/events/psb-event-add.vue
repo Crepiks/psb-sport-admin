@@ -1,6 +1,6 @@
 <template>
-  <div class="tour">
-    <div class="tour-title">Добавление тура</div>
+  <div class="event">
+    <div class="event-title">Добавление тура</div>
     <div class="clearfix">
       <a-upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -18,50 +18,119 @@
         <img alt="example" style="width: 100%" :src="previewImage" />
       </a-modal>
     </div>
-    <div class="tour-info">
+    <div class="event-info">
+      <div class="event-tags">
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Футбол мини' }"
+        >
+          Футбол мини
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Футбол большой' }"
+        >
+          Футбол большой
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == null }"
+        >
+          Волейбол
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Баскетбол' }"
+        >
+          Баскетбол
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Стретчинг' }"
+        >
+          Стретчинг
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Настольный теннис' }"
+        >
+          Настольный теннис
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Бег' }"
+        >
+          Бег
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Гонки с препятствиями' }"
+        >
+          Гонки с препятствиями
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Триатлон' }"
+        >
+          Триатлон
+        </div>
+        <div
+          class="event-tag"
+          :class="{ 'event-tag-active': event.tag == 'Хоккей' }"
+        >
+          Хоккей
+        </div>
+        <div class="event-tag">+</div>
+      </div>
       <psbAppInput
-        class="tour-input"
-        v-model="tour.title"
+        class="event-input"
+        v-model="event.title"
         title="Название"
         placeholder="Введите название"
       />
       <psbAppTextarea
-        class="tour-input"
-        v-model="tour.description"
+        class="event-input"
+        v-model="event.description"
         title="Описание"
         placeholder="Введите описание"
       />
-      <div class="tour-container">
+      <div class="event-container">
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.start"
+          class="event-input event-container-inner"
+          v-model="event.start"
           title="Начало"
           placeholder="Введите дату начала"
         />
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.start"
+          class="event-input event-container-inner"
+          v-model="event.start"
           title="Конец"
           placeholder="Введите дату конца"
         />
       </div>
-      <div class="tour-container">
+      <div class="event-container">
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.lon"
+          class="event-input event-container-inner"
+          v-model="event.lon"
           title="Долгота"
           placeholder="Введите долготу"
         />
         <psbAppInput
-          class="tour-input tour-container-inner"
-          v-model="tour.lat"
+          class="event-input event-container-inner"
+          v-model="event.lat"
           title="Широта"
           placeholder="Введите широту"
         />
       </div>
-      <div class="tour-map-toggle" @click="$emit('toggle-map')">
+      <div class="event-map-toggle" @click="$emit('toggle-map')">
         Указать на карте
       </div>
+      <psbAppInput
+        class="event-input event-container-inner"
+        v-model="event.price"
+        title="Цена"
+        placeholder="Введите цену"
+      />
     </div>
     <psbAppButton @click="handleClick" :isLoading="isLoading"
       >Добавить</psbAppButton
@@ -91,7 +160,7 @@ export default {
   },
   data() {
     return {
-      tour: {
+      event: {
         id: 0,
         tag: "",
         title: "",
@@ -129,7 +198,7 @@ export default {
       this.isLoading = true;
       setTimeout(() => {
         this.isLoading = false;
-        this.$emit("close-tour-add");
+        this.$emit("close-event-add");
       }, 1500);
     },
   },
@@ -140,7 +209,7 @@ export default {
 @import "@/assets/styles/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption&display=swap");
 
-.tour {
+.event {
   max-height: 100%;
   overflow: auto;
 
@@ -188,6 +257,10 @@ export default {
     margin-bottom: 10px;
     cursor: pointer;
     transition: 200ms ease-in-out;
+
+    &-add {
+      font-size: 20px;
+    }
   }
 
   &-tag:hover {

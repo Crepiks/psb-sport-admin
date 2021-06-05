@@ -102,8 +102,8 @@ export default {
   flex-direction: row;
   align-items: center;
   border-radius: 10px;
-  background-color: #1f1f1f;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.15);
+  background-color: $black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   transition: 350ms ease-in-out;
   z-index: 7;
 

@@ -32,25 +32,25 @@
       <h2 class="admins-title">Добавление админа</h2>
       <psbAppInput
         class="admins-input"
-        unsolid="true"
+        :unsolid="true"
         placeholder="Введите имя"
         title="Имя"
       />
       <psbAppInput
         class="admins-input"
-        unsolid="true"
+        :unsolid="true"
         placeholder="Введите фамилию"
         title="Фамилия"
       />
       <psbAppInput
         class="admins-input"
-        unsolid="true"
+        :unsolid="true"
         placeholder="Введите почту"
         title="Почта"
       />
       <psbAppInput
         class="admins-input"
-        unsolid="true"
+        :unsolid="true"
         placeholder="Введите пароль"
         title="Пароль"
         type="password"
@@ -191,6 +191,10 @@ export default {
         },
       ],
       isModalOpen: false,
+      isNotificationOpen: false,
+      notificationHeading: "",
+      notificationText: "",
+      notificationStatus: "",
     };
   },
   methods: {
