@@ -2,8 +2,14 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/antd.css";
 
 Vue.config.productionTip = false;
+
+Vue.use(Antd);
 
 new Vue({
   router,

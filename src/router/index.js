@@ -1,23 +1,39 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import login from "@/views/login/demal-login";
+import appLayout from "@/views/layouts/demal-app-layout";
+import tours from "@/views/tours/demal-tours";
+import admins from "@/views/admins/demal-admins";
+import users from "@/views/users/demal-users";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/login",
+    name: "login",
+    component: login,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/",
+    component: appLayout,
+    children: [
+      {
+        path: "",
+        name: "tours",
+        component: tours,
+      },
+      {
+        path: "admins",
+        name: "admins",
+        component: admins,
+      },
+      {
+        path: "users",
+        name: "users",
+        component: users,
+      },
+    ],
   },
 ];
 
