@@ -7,7 +7,7 @@
       @close-notification="isNotificationOpen = false"
       :status="notificationStatus"
     />
-    <demalAppInputSearch class="admins-search" placeholder="Искать" />
+    <psbAppInputSearch class="admins-search" placeholder="Искать" />
     <div class="admins-container">
       <h2 class="admins-title">
         Админы <span class="admins-number">{{ admins.length }}</span>
@@ -27,59 +27,59 @@
         </svg>
       </div>
     </div>
-    <demalAdminsTable :heads="tableHeads" :items="admins" />
-    <demalModal :isOpen="isModalOpen" @close-modal="isModalOpen = false">
+    <psbAdminsTable :heads="tableHeads" :items="admins" />
+    <psbModal :isOpen="isModalOpen" @close-modal="isModalOpen = false">
       <h2 class="admins-title">Добавление админа</h2>
-      <demalAppInput
+      <psbAppInput
         class="admins-input"
         unsolid="true"
         placeholder="Введите имя"
         title="Имя"
       />
-      <demalAppInput
+      <psbAppInput
         class="admins-input"
         unsolid="true"
         placeholder="Введите фамилию"
         title="Фамилия"
       />
-      <demalAppInput
+      <psbAppInput
         class="admins-input"
         unsolid="true"
         placeholder="Введите почту"
         title="Почта"
       />
-      <demalAppInput
+      <psbAppInput
         class="admins-input"
         unsolid="true"
         placeholder="Введите пароль"
         title="Пароль"
         type="password"
       />
-      <demalAppButton
+      <psbAppButton
         class="admins-button"
         @click="handleClick"
         :isLoading="isLoading"
-        >Добавить</demalAppButton
+        >Добавить</psbAppButton
       >
-    </demalModal>
+    </psbModal>
   </div>
 </template>
 
 <script>
-import demalAppInputSearch from "@/components/common/demal-app-input-search";
-import demalAppInput from "@/components/common/demal-app-input";
-import demalAdminsTable from "@/components/admins/demal-admins-table";
-import demalModal from "@/components/common/demal-modal";
-import demalAppButton from "@/components/common/demal-app-button";
-import notification from "@/components/common/demal-notification";
+import psbAppInputSearch from "@/components/common/psb-app-input-search";
+import psbAppInput from "@/components/common/psb-app-input";
+import psbAdminsTable from "@/components/admins/psb-admins-table";
+import psbModal from "@/components/common/psb-modal";
+import psbAppButton from "@/components/common/psb-app-button";
+import notification from "@/components/common/psb-notification";
 
 export default {
   components: {
-    demalAppInputSearch,
-    demalAppInput,
-    demalAdminsTable,
-    demalModal,
-    demalAppButton,
+    psbAppInputSearch,
+    psbAppInput,
+    psbAdminsTable,
+    psbModal,
+    psbAppButton,
     notification,
   },
   data() {

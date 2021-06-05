@@ -44,37 +44,37 @@
           Без спец оборудования
         </div>
       </div>
-      <demalAppInput class="tour-input" v-model="tour.title" title="Название" />
-      <demalAppTextarea
+      <psbAppInput class="tour-input" v-model="tour.title" title="Название" />
+      <psbAppTextarea
         class="tour-input"
         v-model="tour.description"
         title="Описание"
       />
       <div class="tour-container">
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.start"
           title="Начало"
         />
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.end"
           title="Конец"
         />
       </div>
       <div class="tour-container">
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.lon"
           title="Долгота"
         />
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.lat"
           title="Широта"
         />
       </div>
-      <demalAppInput class="tour-input" v-model="tour.price" title="Цена" />
+      <psbAppInput class="tour-input" v-model="tour.price" title="Цена" />
       <div>
         <div class="tour-bubble-title">Участники</div>
         <div class="tour-bubble-container">
@@ -88,22 +88,22 @@
         </div>
       </div>
     </div>
-    <demalAppButton @click="handleClick" :isLoading="isLoading"
-      >Сохранить</demalAppButton
+    <psbAppButton @click="handleClick" :isLoading="isLoading"
+      >Сохранить</psbAppButton
     >
   </div>
 </template>
 
 <script>
-import demalAppInput from "@/components/common/demal-app-input";
-import demalAppTextarea from "@/components/common/demal-app-textarea";
-import demalAppButton from "@/components/common/demal-app-button";
+import psbAppInput from "@/components/common/psb-app-input";
+import psbAppTextarea from "@/components/common/psb-app-textarea";
+import psbAppButton from "@/components/common/psb-app-button";
 
 export default {
   components: {
-    demalAppInput,
-    demalAppTextarea,
-    demalAppButton,
+    psbAppInput,
+    psbAppTextarea,
+    psbAppButton,
   },
   props: {
     tourId: {

@@ -8,7 +8,7 @@
       :status="notificationStatus"
     />
     <div class="tours-list">
-      <demalAppInputSearch placeholder="Искать" />
+      <psbAppInputSearch placeholder="Искать" />
       <div class="tours-tags">
         <div class="tours-tag">На этой неделе</div>
         <div class="tours-tag">Тур на один день</div>
@@ -66,15 +66,15 @@
 </template>
 
 <script>
-import demalAppInputSearch from "@/components/common/demal-app-input-search";
-import tourCard from "@/components/tours/demal-tour-card";
-import tourEdit from "@/components/tours/demal-tour-edit";
-import tourAdd from "@/components/tours/demal-tour-add";
-import notification from "@/components/common/demal-notification";
+import psbAppInputSearch from "@/components/common/psb-app-input-search";
+import tourCard from "@/components/tours/psb-tour-card";
+import tourEdit from "@/components/tours/psb-tour-edit";
+import tourAdd from "@/components/tours/psb-tour-add";
+import notification from "@/components/common/psb-notification";
 
 export default {
   components: {
-    demalAppInputSearch,
+    psbAppInputSearch,
     tourCard,
     tourEdit,
     tourAdd,
@@ -100,23 +100,23 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/1-1.jpeg",
+              path: "https://static.psb.space/1-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/1-2.jpeg",
+              path: "https://static.psb.space/1-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/1-3.jpeg",
+              path: "https://static.psb.space/1-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/1-4.jpeg",
+              path: "https://static.psb.space/1-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/1-5.jpeg",
+              path: "https://static.psb.space/1-5.jpeg",
             },
           ],
           participants: [
@@ -158,23 +158,23 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/2-1.jpeg",
+              path: "https://static.psb.space/2-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/2-2.jpeg",
+              path: "https://static.psb.space/2-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/2-3.jpeg",
+              path: "https://static.psb.space/2-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/2-4.jpeg",
+              path: "https://static.psb.space/2-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/2-5.jpeg",
+              path: "https://static.psb.space/2-5.jpeg",
             },
           ],
           participants: [
@@ -216,23 +216,23 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/3-1.jpeg",
+              path: "https://static.psb.space/3-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/3-2.jpeg",
+              path: "https://static.psb.space/3-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/3-3.jpeg",
+              path: "https://static.psb.space/3-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/3-4.jpeg",
+              path: "https://static.psb.space/3-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/3-5.jpeg",
+              path: "https://static.psb.space/3-5.jpeg",
             },
           ],
           participants: [
@@ -274,27 +274,27 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/4-1.jpeg",
+              path: "https://static.psb.space/4-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/4-2.jpeg",
+              path: "https://static.psb.space/4-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/4-3.jpeg",
+              path: "https://static.psb.space/4-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/4-4.jpeg",
+              path: "https://static.psb.space/4-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/4-5.jpeg",
+              path: "https://static.psb.space/4-5.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/4-6.jpeg",
+              path: "https://static.psb.space/4-6.jpeg",
             },
           ],
           participants: [
@@ -336,23 +336,23 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/1-1.jpeg",
+              path: "https://static.psb.space/1-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/1-2.jpeg",
+              path: "https://static.psb.space/1-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/1-3.jpeg",
+              path: "https://static.psb.space/1-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/1-4.jpeg",
+              path: "https://static.psb.space/1-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/1-5.jpeg",
+              path: "https://static.psb.space/1-5.jpeg",
             },
           ],
           participants: [
@@ -394,23 +394,23 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/2-1.jpeg",
+              path: "https://static.psb.space/2-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/2-2.jpeg",
+              path: "https://static.psb.space/2-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/2-3.jpeg",
+              path: "https://static.psb.space/2-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/2-4.jpeg",
+              path: "https://static.psb.space/2-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/2-5.jpeg",
+              path: "https://static.psb.space/2-5.jpeg",
             },
           ],
           participants: [
@@ -452,23 +452,23 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/3-1.jpeg",
+              path: "https://static.psb.space/3-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/3-2.jpeg",
+              path: "https://static.psb.space/3-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/3-3.jpeg",
+              path: "https://static.psb.space/3-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/3-4.jpeg",
+              path: "https://static.psb.space/3-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/3-5.jpeg",
+              path: "https://static.psb.space/3-5.jpeg",
             },
           ],
           participants: [
@@ -510,27 +510,27 @@ export default {
           images: [
             {
               id: 1,
-              path: "https://static.demal.space/4-1.jpeg",
+              path: "https://static.psb.space/4-1.jpeg",
             },
             {
               id: 2,
-              path: "https://static.demal.space/4-2.jpeg",
+              path: "https://static.psb.space/4-2.jpeg",
             },
             {
               id: 3,
-              path: "https://static.demal.space/4-3.jpeg",
+              path: "https://static.psb.space/4-3.jpeg",
             },
             {
               id: 4,
-              path: "https://static.demal.space/4-4.jpeg",
+              path: "https://static.psb.space/4-4.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/4-5.jpeg",
+              path: "https://static.psb.space/4-5.jpeg",
             },
             {
               id: 5,
-              path: "https://static.demal.space/4-6.jpeg",
+              path: "https://static.psb.space/4-6.jpeg",
             },
           ],
           participants: [

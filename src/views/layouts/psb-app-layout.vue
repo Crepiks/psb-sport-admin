@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import sidebar from "@/components/common/demal-sidebar";
+import sidebar from "@/components/common/psb-sidebar";
 export default {
   components: {
     sidebar,

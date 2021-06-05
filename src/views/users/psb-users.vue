@@ -7,68 +7,64 @@
       @close-notification="isNotificationOpen = false"
       :status="notificationStatus"
     />
-    <demalAppInputSearch class="users-search" placeholder="Искать" />
+    <psbAppInputSearch class="users-search" placeholder="Искать" />
     <div class="users-container">
       <h2 class="users-title">
         Пользователи <span class="users-number">{{ users.length }}</span>
       </h2>
     </div>
-    <demalUsersTable :heads="tableHeads" :items="users" @click="userCLicked" />
-    <demalModal :isOpen="isModalOpen" @close-modal="isModalOpen = false">
+    <psbUsersTable :heads="tableHeads" :items="users" @click="userCLicked" />
+    <psbModal :isOpen="isModalOpen" @close-modal="isModalOpen = false">
       <h2 class="users-title">Редактирование пользователя</h2>
-      <demalAppInput
+      <psbAppInput
         class="users-input"
         :unsolid="true"
         placeholder="Введите имя"
         title="Имя"
         v-model="user.firstName"
       />
-      <demalAppInput
+      <psbAppInput
         class="users-input"
         :unsolid="true"
         placeholder="Введите фамилию"
         title="Фамилия"
         v-model="user.lastName"
       />
-      <demalAppInput
+      <psbAppInput
         class="users-input"
         :unsolid="true"
         placeholder="Введите почту"
         title="Почта"
         v-model="user.email"
       />
-      <demalAppSelect
-        title="Подписка"
-        class="users-select"
-        :options="options"
-      />
-      <demalAppButton
+      <psbAppSelect title="Подписка" class="users-select" :options="options" />
+      <psbAppButton
         class="users-button"
         @click="handleClick"
         :isLoading="isLoading"
-        >Сохранить</demalAppButton
+        >Сохранить</psbAppButton
       >
-    </demalModal>
+    </psbModal>
   </div>
 </template>
 
 <script>
-import demalAppInputSearch from "@/components/common/demal-app-input-search";
-import demalAppInput from "@/components/common/demal-app-input";
-import demalUsersTable from "@/components/users/demal-users-table";
-import demalModal from "@/components/common/demal-modal";
-import demalAppButton from "@/components/common/demal-app-button";
-import demalAppSelect from "@/components/common/demal-app-select";
-import notification from "@/components/common/demal-notification";
+import psbAppInputSearch from "@/components/common/psb-app-input-search";
+import psbAppInput from "@/components/common/psb-app-input";
+import psbUsersTable from "@/components/users/psb-users-table";
+import psbModal from "@/components/common/psb-modal";
+import psbAppButton from "@/components/common/psb-app-button";
+import psbAppSelect from "@/components/common/psb-app-select";
+import notification from "@/components/common/psb-notification";
 
 export default {
   components: {
-    demalAppInputSearch,
-    demalAppInput,
-    demalUsersTable,
-    demalModal,
-    demalAppButton,
-    demalAppSelect,
+    psbAppInputSearch,
+    psbAppInput,
+    psbUsersTable,
+    psbModal,
+    psbAppButton,
+    psbAppSelect,
     notification,
   },
   data() {

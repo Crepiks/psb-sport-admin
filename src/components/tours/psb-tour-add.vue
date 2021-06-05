@@ -45,26 +45,26 @@
           Без спец оборудования
         </div>
       </div>
-      <demalAppInput
+      <psbAppInput
         class="tour-input"
         v-model="tour.title"
         title="Название"
         placeholder="Введите название"
       />
-      <demalAppTextarea
+      <psbAppTextarea
         class="tour-input"
         v-model="tour.description"
         title="Описание"
         placeholder="Введите описание"
       />
       <div class="tour-container">
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.start"
           title="Начало"
           placeholder="Введите дату начала"
         />
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.start"
           title="Конец"
@@ -72,36 +72,36 @@
         />
       </div>
       <div class="tour-container">
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.lon"
           title="Долгота"
           placeholder="Введите долготу"
         />
-        <demalAppInput
+        <psbAppInput
           class="tour-input tour-container-inner"
           v-model="tour.lat"
           title="Широта"
           placeholder="Введите широту"
         />
       </div>
-      <demalAppInput
+      <psbAppInput
         class="tour-input tour-container-inner"
         v-model="tour.price"
         title="Цена"
         placeholder="Введите цену"
       />
     </div>
-    <demalAppButton @click="handleClick" :isLoading="isLoading"
-      >Добавить</demalAppButton
+    <psbAppButton @click="handleClick" :isLoading="isLoading"
+      >Добавить</psbAppButton
     >
   </div>
 </template>
 
 <script>
-import demalAppInput from "@/components/common/demal-app-input";
-import demalAppTextarea from "@/components/common/demal-app-textarea";
-import demalAppButton from "@/components/common/demal-app-button";
+import psbAppInput from "@/components/common/psb-app-input";
+import psbAppTextarea from "@/components/common/psb-app-textarea";
+import psbAppButton from "@/components/common/psb-app-button";
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -114,9 +114,9 @@ function getBase64(file) {
 
 export default {
   components: {
-    demalAppInput,
-    demalAppTextarea,
-    demalAppButton,
+    psbAppInput,
+    psbAppTextarea,
+    psbAppButton,
   },
   data() {
     return {
