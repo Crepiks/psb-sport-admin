@@ -6,7 +6,7 @@ export const getEvents = async () =>
     method: "GET",
   });
 
-export const addEvent = async (id, data) =>
+export const addEvent = async (data) =>
   await request({
     url: `/events`,
     method: "POST",
