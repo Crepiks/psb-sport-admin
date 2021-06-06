@@ -73,6 +73,8 @@ import psbModal from "@/components/common/psb-modal";
 import psbAppButton from "@/components/common/psb-app-button";
 import notification from "@/components/common/psb-notification";
 
+import { getUsers } from "@/requests/users.js";
+
 export default {
   components: {
     psbAppInputSearch,
@@ -84,112 +86,9 @@ export default {
   },
   data() {
     return {
-      tableHeads: [
-        "Имя",
-        "Фамилия",
-        "Почта",
-        "Дата подтверждения",
-        "Дата создания",
-      ],
+      tableHeads: ["Имя", "Фамилия", "Почта", "Дата создания"],
       isLoading: false,
-      admins: [
-        {
-          id: 0,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 1,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 2,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 3,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 4,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 5,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 6,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 7,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 8,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 9,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 10,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 11,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          emailVerifiedAt: "23.04.2021",
-          createdAt: "23.04.2021",
-        },
-      ],
+      admins: [],
       isModalOpen: false,
       isNotificationOpen: false,
       notificationHeading: "",
@@ -208,6 +107,16 @@ export default {
         this.notificationHeading = "Администратор успешно добавлен!";
       }, 1500);
     },
+  },
+  mounted() {
+    getUsers()
+      .then((res) => {
+        this.admins = res.data.users;
+      })
+      .catch(() => {
+        this.notificationHeading = "Что-то пошло не так";
+        this.isNotificationOpen = true;
+      });
   },
 };
 </script>

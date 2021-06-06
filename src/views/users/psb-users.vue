@@ -57,6 +57,8 @@ import psbAppButton from "@/components/common/psb-app-button";
 import psbAppSelect from "@/components/common/psb-app-select";
 import notification from "@/components/common/psb-notification";
 
+import { getUsers } from "@/requests/users.js";
+
 export default {
   components: {
     psbAppInputSearch,
@@ -69,7 +71,7 @@ export default {
   },
   data() {
     return {
-      tableHeads: ["Имя", "Фамилия", "Почта", "Подписка", "Дата создания"],
+      tableHeads: ["Имя", "Фамилия", "Почта", "Дата создания"],
       options: ["Нет подписки", "Новичок", "Любитель", "Экстремал"],
       isLoading: false,
       user: {
@@ -79,104 +81,7 @@ export default {
         email: "donchik020202@gmail.com",
         subscription: "-",
       },
-      users: [
-        {
-          id: 0,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 1,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 2,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 3,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 4,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 5,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 6,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 7,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 8,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 9,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 10,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-        {
-          id: 11,
-          firstName: "Данияр",
-          lastName: "Егеубай",
-          email: "donchik020202@gmail.com",
-          subscription: "-",
-          createdAt: "23.04.2021",
-        },
-      ],
+      users: [],
       isModalOpen: false,
       isNotificationOpen: false,
       notificationHeading: "",
@@ -199,6 +104,16 @@ export default {
         this.notificationHeading = "Изменения успешно сохранены!";
       }, 1500);
     },
+  },
+  mounted() {
+    getUsers()
+      .then((res) => {
+        this.users = res.data.users;
+      })
+      .catch(() => {
+        this.notificationHeading = "Что-то пошло не так";
+        this.isNotificationOpen = true;
+      });
   },
 };
 </script>
