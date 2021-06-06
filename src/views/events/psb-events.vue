@@ -253,7 +253,7 @@ export default {
       this.active = "empty";
       this.isNotificationOpen = true;
       this.notificationStatus = "success";
-      this.notificationHeading = "Тур успешно добавлен!";
+      this.notificationHeading = "Событие успешно добавлено!";
     },
     eventEdited() {
       this.isNotificationOpen = true;
