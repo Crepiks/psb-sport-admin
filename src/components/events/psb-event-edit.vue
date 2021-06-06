@@ -78,32 +78,8 @@
       >Сохранить</psbAppButton
     >
     <psbModal :isOpen="isModalOpen" @close-modal="isModalOpen = false">
-      <h2 class="admins-title">Добавление админа</h2>
-      <psbAppInput
-        class="admins-input"
-        :unsolid="true"
-        placeholder="Введите имя"
-        title="Имя"
-      />
-      <psbAppInput
-        class="admins-input"
-        :unsolid="true"
-        placeholder="Введите фамилию"
-        title="Фамилия"
-      />
-      <psbAppInput
-        class="admins-input"
-        :unsolid="true"
-        placeholder="Введите почту"
-        title="Почта"
-      />
-      <psbAppInput
-        class="admins-input"
-        :unsolid="true"
-        placeholder="Введите пароль"
-        title="Пароль"
-        type="password"
-      />
+      <h2 class="admins-title">Добавление вида спорта</h2>
+      <psbAppSelect title="Подписка" class="event-select" :options="options" />
       <psbAppButton
         class="admins-button"
         @click="handleClick"
@@ -118,6 +94,7 @@
 import psbAppInput from "@/components/common/psb-app-input";
 import psbAppTextarea from "@/components/common/psb-app-textarea";
 import psbAppButton from "@/components/common/psb-app-button";
+import psbAppSelect from "@/components/common/psb-app-select";
 import psbModal from "@/components/common/psb-modal";
 
 // import { getEvent, editEvent as editEventRequest } from "@/requests/events.js"
@@ -128,6 +105,7 @@ export default {
     psbAppTextarea,
     psbAppButton,
     psbModal,
+    psbAppSelect,
   },
   props: {
     eventId: {
@@ -141,6 +119,14 @@ export default {
     return {
       mainImage: null,
       isLoading: false,
+      options: [
+        "Футбол мини",
+        "Футбол большой",
+        "Хоккей",
+        "Баскетбол",
+        "Волейбол",
+        "Настольный теннис",
+      ],
       // event: {},
       sports: [
         "Футбол большой",
@@ -346,6 +332,11 @@ export default {
       opacity: 0.7;
       margin-bottom: 10px;
     }
+  }
+
+  &-select {
+    margin-top: 20px;
+    width: 100%;
   }
 }
 
