@@ -78,7 +78,7 @@ import eventAdd from "@/components/events/psb-event-add";
 import notification from "@/components/common/psb-notification";
 import psbEventMap from "@/components/events/psb-event-map.vue";
 
-import { getEvents } from "@/requests/events.js";
+// import { getEvents } from "@/requests/events.js";
 
 export default {
   components: {
@@ -215,17 +215,20 @@ export default {
         },
         {
           id: 8,
-          title: "Соревнования по футболу",
+          title: "Соревнования по баскетболу",
           lat: 54.039777,
           lon: 43.935073,
           description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in viverra leo. Sed porta mauris ut nisi rhoncus ullamcorper. Integer pharetra cursus viverra. Aenean orci tortor, volutpat id iaculis vel, consequat quis mauris. Phasellus ut felis lectus. Aenean enim risus, tempor ac sem quis, fringilla auctor purus. Proin vitae enim sit amet purus viverra eleifend in sed lacus.",
+            "Международный турнир по баскетболу, проводимый с 1950 года раз в 4 года под эгидой ФИБА для мужских национальных сборных. Наряду с олимпийским турниром является самым престижным соревнованием по данному виду спорта.",
           images: [],
           date: "2021-05-05T14:24:01.000Z",
           duration: 3,
           sport: [
             {
-              title: "Бег",
+              title: "Баскетбол",
+            },
+            {
+              title: "Волейбол",
             },
           ],
         },
@@ -259,14 +262,14 @@ export default {
     },
   },
   mounted() {
-    getEvents()
-      .then((res) => {
-        this.events = res.data.events;
-      })
-      .catch(() => {
-        this.notificationHeading = "Что-то пошло не так";
-        this.isNotificationOpen = true;
-      });
+    // getEvents()
+    //   .then((res) => {
+    //     this.events = res.data.events;
+    //   })
+    //   .catch(() => {
+    //     this.notificationHeading = "Что-то пошло не так";
+    //     this.isNotificationOpen = true;
+    //   });
   },
 };
 </script>
@@ -333,6 +336,8 @@ export default {
 
   &-card {
     margin-bottom: 30px;
+    border-bottom: 1px solid #d8d8de;
+    padding-bottom: 20px;
   }
 
   &-tags {

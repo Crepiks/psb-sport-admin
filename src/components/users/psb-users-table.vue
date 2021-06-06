@@ -15,7 +15,6 @@
         <td class="table-data">{{ item.firstName }}</td>
         <td class="table-data">{{ item.lastName }}</td>
         <td class="table-data">{{ item.email }}</td>
-        <td class="table-data">{{ item.subscription }}</td>
         <td class="table-data">{{ item.createdAt }}</td>
       </tr>
     </table>

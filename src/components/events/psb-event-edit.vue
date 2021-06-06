@@ -1,7 +1,7 @@
 <template>
   <div class="event">
     <h2 class="event-title">Редактирование события</h2>
-    <div class="event-image">
+    <!-- <div class="event-image">
       <img
         :src="mainImage ? mainImage : null"
         class="event-image-inner"
@@ -28,7 +28,7 @@
           <i class="far fa-trash-alt event-images-single-cover-icon"></i>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="event-info">
       <div class="event-tags">
         <div
@@ -38,7 +38,12 @@
         >
           {{ sport.title }}
         </div>
-        <div class="event-tag event-tag-add">+</div>
+        <div
+          class="event-tag event-tag-add"
+          @click="isModalOpen = !isModalOpen"
+        >
+          +
+        </div>
       </div>
       <psbAppInput class="event-input" v-model="event.title" title="Название" />
       <psbAppTextarea
@@ -69,7 +74,43 @@
         Посмотреть на карте
       </div>
     </div>
-    <psbAppButton :isLoading="isLoading">Сохранить</psbAppButton>
+    <psbAppButton :isLoading="isLoading" @click="editEvent"
+      >Сохранить</psbAppButton
+    >
+    <psbModal :isOpen="isModalOpen" @close-modal="isModalOpen = false">
+      <h2 class="admins-title">Добавление админа</h2>
+      <psbAppInput
+        class="admins-input"
+        :unsolid="true"
+        placeholder="Введите имя"
+        title="Имя"
+      />
+      <psbAppInput
+        class="admins-input"
+        :unsolid="true"
+        placeholder="Введите фамилию"
+        title="Фамилия"
+      />
+      <psbAppInput
+        class="admins-input"
+        :unsolid="true"
+        placeholder="Введите почту"
+        title="Почта"
+      />
+      <psbAppInput
+        class="admins-input"
+        :unsolid="true"
+        placeholder="Введите пароль"
+        title="Пароль"
+        type="password"
+      />
+      <psbAppButton
+        class="admins-button"
+        @click="handleClick"
+        :isLoading="isLoading"
+        >Добавить</psbAppButton
+      >
+    </psbModal>
   </div>
 </template>
 
@@ -77,6 +118,7 @@
 import psbAppInput from "@/components/common/psb-app-input";
 import psbAppTextarea from "@/components/common/psb-app-textarea";
 import psbAppButton from "@/components/common/psb-app-button";
+import psbModal from "@/components/common/psb-modal";
 
 // import { getEvent, editEvent as editEventRequest } from "@/requests/events.js"
 
@@ -85,6 +127,7 @@ export default {
     psbAppInput,
     psbAppTextarea,
     psbAppButton,
+    psbModal,
   },
   props: {
     eventId: {
@@ -111,6 +154,7 @@ export default {
         "Настольный теннис",
         "Стретчинг",
       ],
+      isModalOpen: false,
     };
   },
   methods: {
@@ -124,18 +168,22 @@ export default {
     changeMainImage(path) {
       this.mainImage = path;
     },
-    // editEvent() {
-    //   this.isLoading = true;
-    //   editEvent(this.eventId, this.event)
-    //     .then((res) => {
-    //       this.event = res.data.event;
-    //       this.isLoading = false;
-    //       this.$emit("event-edited");
-    //     })
-    //     .catch((err) => {
-    //       console.log(err)
-    //     });
-    // }
+    editEvent() {
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        this.$emit("event-edited");
+      }, 1000);
+      // editEvent(this.eventId, this.event)
+      //   .then((res) => {
+      //     this.event = res.data.event;
+      //     this.isLoading = false;
+      //     this.$emit("event-edited");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err)
+      //   });
+    },
   },
   // mounted() {
   //   getEvent(this.eventId)
@@ -298,6 +346,61 @@ export default {
       opacity: 0.7;
       margin-bottom: 10px;
     }
+  }
+}
+
+.admins {
+  color: $white;
+
+  &-container {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  &-search {
+    width: 500px;
+  }
+
+  &-title {
+    font-family: "PT Sans Caption", sans-serif !important;
+    color: $white;
+    opacity: 0.9;
+    margin-right: 30px;
+  }
+
+  &-add {
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $dark-white;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+  }
+
+  &-add:hover {
+    opacity: 0.8;
+  }
+
+  &-input {
+    margin-top: 20px;
+  }
+
+  &-button {
+    margin-top: 30px;
+    width: 100%;
+    color: $black;
+  }
+
+  &-number {
+    font-size: 12px;
+    color: $white;
+    opacity: 0.7;
   }
 }
 </style>

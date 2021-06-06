@@ -63,7 +63,7 @@ import psbAppInput from "@/components/common/psb-app-input";
 import psbAppTextarea from "@/components/common/psb-app-textarea";
 import psbAppButton from "@/components/common/psb-app-button";
 
-import { addEvent } from "@/requests/events.js";
+// import { addEvent } from "@/requests/events.js";
 
 export default {
   components: {
@@ -74,12 +74,11 @@ export default {
   data() {
     return {
       event: {
-        title: "Соревнования по футболу",
-        description:
-          "Командный вид спорта, в котором целью является забить мяч в ворота соперника ногами или другими частями тела (кроме рук) большее количество раз, чем команда соперника. В настоящее время самый популярный и массовый вид спорта в мире",
-        date: "28.06.2021",
-        lon: "54.043043",
-        lat: "54.043043",
+        title: "",
+        description: "",
+        date: "",
+        lon: "",
+        lat: "",
         sports: [
           {
             title: "Футбол большой",
@@ -146,15 +145,19 @@ export default {
   methods: {
     handleClick() {
       this.isLoading = true;
-      addEvent(this.event)
-        .then(() => {
-          this.isLoading = false;
-          this.$emit("close-event-add");
-        })
-        .catch((err) => {
-          console.log(err);
-          this.isLoading = false;
-        });
+      setTimeout(() => {
+        this.isLoading = false;
+        this.$emit("close-event-add");
+      }, 1000);
+      // addEvent(this.event)
+      //   .then(() => {
+      //     this.isLoading = false;
+      //     this.$emit("close-event-add");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     this.isLoading = false;
+      //   });
     },
     sportClicked(sportId) {
       console.log(this.sports[sportId].active);
