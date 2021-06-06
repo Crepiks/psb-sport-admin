@@ -1,5 +1,6 @@
 <template>
   <div class="event">
+    <h2 class="event-title">Редактирование события</h2>
     <div class="event-image">
       <img
         :src="mainImage ? mainImage : null"
@@ -154,6 +155,11 @@ export default {
 .event {
   max-height: 100%;
   overflow: auto;
+
+  &-title {
+    font-family: "PT Sans Caption", sans-serif !important;
+    font-size: 28px;
+  }
 
   &-image {
     width: 100%;

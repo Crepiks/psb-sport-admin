@@ -21,9 +21,8 @@
         <i class="far fa-edit event-edit"></i>
       </div>
       <div class="event-name">{{ event.title }}</div>
-      <div class="event-date">Начало: {{ event.date }}</div>
       <div class="event-container">
-        <div class="event-rating"></div>
+        <div class="event-date">Начало: {{ event.date }}</div>
         <div class="event-people">{{ event.duration }} дня</div>
       </div>
     </div>

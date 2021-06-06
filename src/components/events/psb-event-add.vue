@@ -1,84 +1,16 @@
 <template>
   <div class="event">
     <div class="event-title">Добавление события</div>
-    <div class="clearfix">
-      <a-upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        list-type="picture-card"
-        :file-list="fileList"
-        @preview="handlePreview"
-        @change="handleChange"
-      >
-        <div v-if="fileList.length < 8">
-          <a-icon type="plus" />
-          <div class="ant-upload-text">Upload</div>
-        </div>
-      </a-upload>
-      <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-        <img alt="example" style="width: 100%" :src="previewImage" />
-      </a-modal>
-    </div>
     <div class="event-info">
       <div class="event-tags">
         <div
           class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Футбол мини' }"
+          v-for="(sport, index) in sports"
+          :key="index"
+          @click="sportClicked(sport.id)"
+          :class="{ 'event-tag-highlight': sport.active }"
         >
-          Футбол мини
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Футбол большой' }"
-        >
-          Футбол большой
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == null }"
-        >
-          Волейбол
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Баскетбол' }"
-        >
-          Баскетбол
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Стретчинг' }"
-        >
-          Стретчинг
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Настольный теннис' }"
-        >
-          Настольный теннис
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Бег' }"
-        >
-          Бег
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Гонки с препятствиями' }"
-        >
-          Гонки с препятствиями
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Триатлон' }"
-        >
-          Триатлон
-        </div>
-        <div
-          class="event-tag"
-          :class="{ 'event-tag-active': event.tag == 'Хоккей' }"
-        >
-          Хоккей
+          {{ sport.title }}
         </div>
         <div class="event-tag">+</div>
       </div>
@@ -97,15 +29,9 @@
       <div class="event-container">
         <psbAppInput
           class="event-input event-container-inner"
-          v-model="event.start"
+          v-model="event.date"
           title="Начало"
           placeholder="Введите дату начала"
-        />
-        <psbAppInput
-          class="event-input event-container-inner"
-          v-model="event.start"
-          title="Конец"
-          placeholder="Введите дату конца"
         />
       </div>
       <div class="event-container">
@@ -125,12 +51,6 @@
       <div class="event-map-toggle" @click="$emit('toggle-map')">
         Указать на карте
       </div>
-      <psbAppInput
-        class="event-input event-container-inner"
-        v-model="event.price"
-        title="Цена"
-        placeholder="Введите цену"
-      />
     </div>
     <psbAppButton @click="handleClick" :isLoading="isLoading"
       >Добавить</psbAppButton
@@ -143,14 +63,7 @@ import psbAppInput from "@/components/common/psb-app-input";
 import psbAppTextarea from "@/components/common/psb-app-textarea";
 import psbAppButton from "@/components/common/psb-app-button";
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
+import { addEvent } from "@/requests/events.js";
 
 export default {
   components: {
@@ -161,46 +74,96 @@ export default {
   data() {
     return {
       event: {
-        id: 0,
-        tag: "",
         title: "",
         description: "",
-        start: "",
-        end: "",
+        date: "",
         lon: "",
         lat: "",
-        equipment: "",
-        participants: [],
-        rating: "",
-        images: [],
+        sports: [
+          {
+            title: "Футбол большой",
+          },
+        ],
       },
-      previewVisible: false,
-      previewImage: "",
-      fileList: [],
       isLoading: false,
+      selected: undefined,
+      sports: [
+        {
+          id: "0",
+          title: "Футбол большой",
+          active: false,
+        },
+        {
+          id: "1",
+          title: "Баскетбол",
+          active: false,
+        },
+        {
+          id: "2",
+          title: "Футбол мини",
+          active: false,
+        },
+        {
+          id: "3",
+          title: "Волейбол",
+          active: false,
+        },
+        {
+          id: "4",
+          title: "Триатлон",
+          active: false,
+        },
+        {
+          id: "5",
+          title: "Хоккей",
+          active: false,
+        },
+        {
+          id: "6",
+          title: "Бег",
+          active: false,
+        },
+        {
+          id: "7",
+          title: "Гонки с препятствиями",
+          active: false,
+        },
+        {
+          id: "8",
+          title: "Настольный теннис",
+          active: false,
+        },
+        {
+          id: "9",
+          title: "Стретчинг",
+          active: false,
+        },
+      ],
+      newSports: [],
     };
   },
   methods: {
-    handleCancel() {
-      this.previewVisible = false;
-    },
-    async handlePreview(file) {
-      if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj);
-      }
-      this.previewImage = file.url || file.preview;
-      this.previewVisible = true;
-    },
-    handleChange({ fileList }) {
-      this.fileList = fileList;
-    },
     handleClick() {
       this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-        this.$emit("close-event-add");
-      }, 1500);
+      addEvent(this.event)
+        .then(() => {
+          this.isLoading = false;
+          this.$emit("close-event-add");
+        })
+        .catch((err) => {
+          console.log(err);
+          this.isLoading = false;
+        });
     },
+    sportClicked(sportId) {
+      console.log(this.sports[sportId].active);
+      if (this.sports[sportId].active == true) {
+        this.sports[sportId].active = false;
+      } else {
+        this.sports[sportId].active = true;
+      }
+    },
+    mounted() {},
   },
 };
 </script>
@@ -260,6 +223,11 @@ export default {
 
     &-add {
       font-size: 20px;
+    }
+
+    &-highlight {
+      background-color: #b2b2b2;
+      color: $black;
     }
   }
 
