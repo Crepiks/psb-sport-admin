@@ -78,7 +78,7 @@ import eventAdd from "@/components/events/psb-event-add";
 import notification from "@/components/common/psb-notification";
 import psbEventMap from "@/components/events/psb-event-map.vue";
 
-// import { getEvents } from "@/requests/events.js"
+import { getEvents } from "@/requests/events.js";
 
 export default {
   components: {
@@ -258,16 +258,16 @@ export default {
       this.notificationHeading = "Изменения сохранены!";
     },
   },
-  // mounted() {
-  //   getEvents()
-  //     .then((res) => {
-  //       this.events = res.data.events;
-  //     })
-  //     .catch(() => {
-  //       this.notificationHeading = "Что-то пошло не так";
-  //       this.isNotificationOpen = true;
-  //     });
-  // }
+  mounted() {
+    getEvents()
+      .then((res) => {
+        this.events = res.data.events;
+      })
+      .catch(() => {
+        this.notificationHeading = "Что-то пошло не так";
+        this.isNotificationOpen = true;
+      });
+  },
 };
 </script>
 
